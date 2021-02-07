@@ -4,6 +4,7 @@ using System.Text;
 using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 { 
@@ -38,6 +39,11 @@ namespace Business.Concrete
             return _cars.GetAll();
         }
 
+        public Car GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Car> GetCarsByBrandId(int id)
         {
             return _cars.GetAll(p => p.BrandId == id);
@@ -58,9 +64,19 @@ namespace Business.Concrete
             throw new NotImplementedException();
         }
 
+        public List<CarDetailDto> GetAllCarDetails()
+        {
+            return _cars.GetAllCarDetail();
+        }
+
         public void Update(Car car)
         {
             _cars.Update(car);
+        }
+
+        public List<CarDetailDto> GetProductDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }

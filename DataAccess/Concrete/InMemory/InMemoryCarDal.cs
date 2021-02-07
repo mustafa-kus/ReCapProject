@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace DataAccess.Concrete
 {
@@ -13,7 +14,7 @@ namespace DataAccess.Concrete
         List<Car> _cars;
         List<Brand> _brand;
         List<Color> _color;
-        List<tempClass> _templist;
+       
         public InMemoryCarDal()
         {
             _cars = new List<Car>
@@ -68,6 +69,11 @@ namespace DataAccess.Concrete
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<CarDetailDto> GetAllCarDetail()
         {
             throw new NotImplementedException();
         }
