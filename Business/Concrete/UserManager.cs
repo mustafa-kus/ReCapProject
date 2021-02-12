@@ -9,18 +9,19 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class ColorManager : IColorService
+    public class UserManager : IUserService
     {
-        IColorDal _color;
-        public ColorManager(IColorDal colorDal)
+        IUserDal _users;
+        public UserManager(IUserDal user)
         {
-            _color = colorDal;
+            _users = user;
+
         }
-        public IResult Add(Color color)
+        public IResult Add(User user)
         {
             try
             {
-                _color.Add(color);
+                _users.Add(user);
                 return new SuccessResult(Messages.AddedOK);
             }
             catch
@@ -29,12 +30,11 @@ namespace Business.Concrete
             }
         }
 
-        public IResult Delete(Color color)
+        public IResult Delete(User user)
         {
-           
             try
             {
-                _color.Delete(color);
+                _users.Delete(user);
                 return new SuccessResult(Messages.DeletedOK);
             }
             catch
@@ -43,22 +43,21 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<Color>> GetAll()
+        public IDataResult<List<User>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>( _color.GetAll());
+            return new SuccessDataResult<List<User>>(_users.GetAll(), Messages.ListedOK);
         }
 
-        public IDataResult< Color> GetById(int id)
+        public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<Color>( _color.Get(c => c.ColorId == id));
+            return new SuccessDataResult<User>(_users.Get(b => b.Id == id));
         }
 
-        public IResult Update(Color color)
+        public IResult Update(User user)
         {
-            
             try
             {
-                _color.Update(color);
+                _users.Update(user);
                 return new SuccessResult(Messages.UpdatedOK);
             }
             catch

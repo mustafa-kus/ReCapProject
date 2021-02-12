@@ -9,18 +9,19 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    public class ColorManager : IColorService
+    public class CustomerManager:ICustomerService
     {
-        IColorDal _color;
-        public ColorManager(IColorDal colorDal)
+        ICustomerDal _customers;
+        public CustomerManager(ICustomerDal customer)
         {
-            _color = colorDal;
+            _customers = customer;
+
         }
-        public IResult Add(Color color)
+        public IResult Add(Customer customer)
         {
             try
             {
-                _color.Add(color);
+                _customers.Add(customer);
                 return new SuccessResult(Messages.AddedOK);
             }
             catch
@@ -29,12 +30,11 @@ namespace Business.Concrete
             }
         }
 
-        public IResult Delete(Color color)
+        public IResult Delete(Customer customer)
         {
-           
             try
             {
-                _color.Delete(color);
+                _customers.Delete(customer);
                 return new SuccessResult(Messages.DeletedOK);
             }
             catch
@@ -43,22 +43,21 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<List<Color>> GetAll()
+        public IDataResult<List<Customer>> GetAll()
         {
-            return new SuccessDataResult<List<Color>>( _color.GetAll());
+            return new SuccessDataResult<List<Customer>>(_customers.GetAll(), Messages.ListedOK);
         }
 
-        public IDataResult< Color> GetById(int id)
+        public IDataResult<List<Customer>> GetById(int id)
         {
-            return new SuccessDataResult<Color>( _color.Get(c => c.ColorId == id));
+            return new SuccessDataResult<List<Customer>>(_customers.GetAll(c => c.UserId == id));
         }
 
-        public IResult Update(Color color)
+        public IResult Update(Customer customer)
         {
-            
             try
             {
-                _color.Update(color);
+                _customers.Update(customer);
                 return new SuccessResult(Messages.UpdatedOK);
             }
             catch

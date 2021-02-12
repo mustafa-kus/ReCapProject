@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -12,31 +14,55 @@ namespace Business.Concrete
         IBrandDal _brand;
         public BrandManager(IBrandDal brandDal)
         {
-            _brand= brandDal;
+            _brand = brandDal;
         }
-        public void Add(Brand brand)
+        public IResult Add(Brand brand)
         {
-            _brand.Add(brand);
-        }
-
-        public void Delete(Brand brand)
-        {
-            _brand.Delete(brand);
-        }
-
-        public List<Brand> GetAll()
-        {
-            return _brand.GetAll();
+            try
+            {
+                _brand.Add(brand);
+                return new SuccessResult(Messages.AddedOK);
+            }
+            catch
+            {
+                return new ErrorResult(Messages.AddedErr);
+            }
         }
 
-        public Brand GetById(int id)
+        public IResult Delete(Brand brand)
         {
-            return _brand.GetAll(b => b.BrandId == id)[0];
+            try
+            {
+                _brand.Delete(brand);
+                return new SuccessResult(Messages.DeletedOK);
+            }
+            catch
+            {
+                return new ErrorResult(Messages.DeletedErr);
+            }
         }
 
-        public void Update(Brand brand)
+        public IDataResult<List<Brand>> GetAll()
         {
-            _brand.Update(brand);
+            return new SuccessDataResult<List<Brand>>(_brand.GetAll(), Messages.ListedOK);
+        }
+
+        public IDataResult<Brand> GetById(int id)
+        {
+            return new SuccessDataResult<Brand>(_brand.Get(b => b.BrandId == id));
+        }
+
+        public IResult Update(Brand brand)
+        {
+            try
+            {
+                _brand.Update(brand);
+                return new SuccessResult(Messages.UpdatedOK);
+            }
+            catch
+            {
+                return new ErrorResult(Messages.UpdatedErr);
+            }
         }
     }
 }
