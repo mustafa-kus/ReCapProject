@@ -17,6 +17,6 @@ namespace Business.Constants
         public static string ListedErr = "Listelenemedi";
 
         public static string MaintenanceTime = "Sistem Bakımda";
-        
+        public static string CarImageLimitExceeded="Bir Arababa için maksimum 5 resim ekleyebilirsiniz.";
     }
 }
