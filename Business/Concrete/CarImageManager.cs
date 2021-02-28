@@ -32,6 +32,8 @@ namespace Business.Concrete
                 return result;
             }
             carImage.ImagePath = FileHelper.Add(file);
+            
+
             carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult(Messages.AddedOK);
@@ -54,6 +56,7 @@ namespace Business.Concrete
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
+
         }
 
         public IDataResult<CarImage> GetByCarId(int id)
@@ -109,6 +112,6 @@ namespace Business.Concrete
 
             return new SuccessResult();
         }
-        
+
     }
 }

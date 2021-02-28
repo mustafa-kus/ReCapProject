@@ -11,44 +11,44 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             
-            //CarAdd();
-            //Kullanıcı Ekle
-            UserManager userManager = new UserManager(new EfUserDal());
-            User user1 = new User { FirstName="Mustafa", LastName="Kuş", Email="mustafa_kus@hotmail.com", Password="Yıl.2021" };
-            var result=userManager.Add(user1);
-            Console.WriteLine("User1 "+ result.Message);
-            User user2 = new User { FirstName = "Muzaffer", LastName = "Övün", Email = "muzafferovun@hotmail.com", Password = "MÖ.2021" };
-            result = userManager.Add(user2);
-            Console.WriteLine("User2 " + result.Message);
+            ////CarAdd();
+            ////Kullanıcı Ekle
+            //UserManager userManager = new UserManager(new EfUserDal());
+            //User user1 = new User { FirstName="Mustafa", LastName="Kuş", Email="mustafa_kus@hotmail.com", Password="Yıl.2021" };
+            //var result=userManager.Add(user1);
+            //Console.WriteLine("User1 "+ result.Message);
+            //User user2 = new User { FirstName = "Muzaffer", LastName = "Övün", Email = "muzafferovun@hotmail.com", Password = "MÖ.2021" };
+            //result = userManager.Add(user2);
+            //Console.WriteLine("User2 " + result.Message);
             //Müşteri Ekle
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            Customer customer1 = new Customer
-            {
-                UserId = user1.Id,
-                CompanyName = "M&F"
-            };
-            result= customerManager.Add(customer1);
-            Console.WriteLine("customer1 " + result.Message);
-            result=customerManager.Add(new Customer
-            {
-                UserId = user2.Id,
-                CompanyName = "Verim"
-            });
-            Console.WriteLine("customer2 " + result.Message);
-            //Araç Kirala
+            //CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //Customer customer1 = new Customer
+            //{
+            //    UserId = user1.Id,
+            //    CompanyName = "M&F"
+            //};
+            //result= customerManager.Add(customer1);
+            //Console.WriteLine("customer1 " + result.Message);
+            //result=customerManager.Add(new Customer
+            //{
+            //    UserId = user2.Id,
+            //    CompanyName = "Verim"
+            //});
+            //Console.WriteLine("customer2 " + result.Message);
+            ////Araç Kirala
            
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            Rental rental1 = new Rental { CarId = 1, CustomerId = 2, RentDate = Convert.ToDateTime("12.02.2021")};
-            result=rentalManager.Add(rental1);
-            Console.WriteLine("Araç Kiralama " + result.Message);
-            //Araç Kiralanamaz
-            result=rentalManager.Add(new Rental
-            {
-                CarId = 1,
-                CustomerId = 2,
-                RentDate = Convert.ToDateTime("13.02.2021")
-            });
-            Console.WriteLine(result.Message);
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //Rental rental1 = new Rental { CarId = 1, CustomerId = 2, RentDate = Convert.ToDateTime("12.02.2021")};
+            //result=rentalManager.Add(rental1);
+            //Console.WriteLine("Araç Kiralama " + result.Message);
+            ////Araç Kiralanamaz
+            //result=rentalManager.Add(new Rental
+            //{
+            //    CarId = 1,
+            //    CustomerId = 2,
+            //    RentDate = Convert.ToDateTime("13.02.2021")
+            //});
+            //Console.WriteLine(result.Message);
 
 
 
