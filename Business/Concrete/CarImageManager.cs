@@ -12,6 +12,7 @@ using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.Concrete
@@ -26,7 +27,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
-            IResult result = BusinessRules.Run(CheckImageLimitExceeded(carImage.CarId));
+            IResult result = BusinessRules.Run(CheckImageLimitExceeded(carImage.CarID));
             if (result != null)
             {
                 return result;
@@ -61,7 +62,7 @@ namespace Business.Concrete
 
         public IDataResult<CarImage> GetByCarId(int id)
         {
-            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarId == id));
+            return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.CarID == id));
         }
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
@@ -80,7 +81,7 @@ namespace Business.Concrete
         //business rules
         private IResult CheckImageLimitExceeded(int carid)
         {
-            var carImagecount = _carImageDal.GetAll(p => p.CarId == carid).Count;
+            var carImagecount = _carImageDal.GetAll(p => p.CarID == carid).Count;
             if (carImagecount >= 5)
             {
                 return new ErrorResult(Messages.CarImageLimitExceeded);
@@ -91,12 +92,12 @@ namespace Business.Concrete
         private List<CarImage> CheckIfCarImageNull(int id)
         {
             string path = @"\Images\CarImages\araba.jpg";
-            var result = _carImageDal.GetAll(c => c.CarId == id).Any();
+            var result = _carImageDal.GetAll(c => c.CarID == id).Any();
             if (!result)
             {
-                return new List<CarImage> { new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now } };
+                return new List<CarImage> { new CarImage { CarID = id, ImagePath = path, Date = DateTime.Now } };
             }
-            return _carImageDal.GetAll(p => p.CarId == id);
+            return _carImageDal.GetAll(p => p.CarID == id);
         }
         private IResult CarImageDelete(CarImage carImage)
         {
@@ -113,5 +114,24 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IResult Add2(CarImagesOperationDto carImagesOperationDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Update2(CarImagesOperationDto carImagesOperationDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IResult Delete2(CarImage entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataResult<List<CarImage>> GetAllByCarId(int carId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

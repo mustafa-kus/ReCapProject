@@ -80,9 +80,9 @@ namespace ConsoleUI
             Brand newBrand4 = new Brand { BrandName = "Honda" };
             brandManager.Add(newBrand4);
 
-            CarManager carManager = new CarManager(new EfCarDal());
+            //CarManager carManager = new CarManager(new EfCarDal());
             //showCars();
-            showCars2();
+            //showCars2();
             //Yeni Araba Ekle
             Car newCar = new Car { BrandId = 1, ColorId = 1, DailyPrice = 10, ModelYear = 2000, Description = "Fiat" };
             //Araba Güncelle
@@ -91,39 +91,39 @@ namespace ConsoleUI
             //Araba sil
             Car deleteCar = new Car { Id = 1, BrandId = 1, ColorId = 1, DailyPrice = 10, ModelYear = 2000, Description = "Fiat" };
 
-            carManager.Update(updateCar);
-            showCars2();
+            //carManager.Update(updateCar);
+           // showCars2();
         }
 
-        private static void showCars()
-        {
-            CarManager carManager = new CarManager(new EfCarDal());
+        //private static void showCars()
+        //{
+        //    CarManager carManager = new CarManager(new EfCarDal());
             
-            foreach (var car in carManager.GetAll().Data)
-            {
-                Console.WriteLine("{0}:{1}:{2}:{3}:{4}:{5}",
-                    car.Id,
-                    car.BrandId,
-                    car.ColorId,
-                    car.ModelYear,
-                    car.DailyPrice,
-                    car.Description
-                    );
-            }
-        }
-        private static void showCars2()
-        {
-            CarManager carManager = new CarManager(new EfCarDal());
+        //    foreach (var car in carManager.GetAll().Data)
+        //    {
+        //        Console.WriteLine("{0}:{1}:{2}:{3}:{4}:{5}",
+        //            car.Id,
+        //            car.BrandId,
+        //            car.ColorId,
+        //            car.ModelYear,
+        //            car.DailyPrice,
+        //            car.Description
+        //            );
+        //    }
+        //}
+        //private static void showCars2()
+        //{
+        //    CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var car in carManager.GetCarDetails().Data)
-            {
-                Console.WriteLine("{0}:{1}:{2}:{3}",
-                    car.CarName,
-                    car.BrandName,
-                    car.ColorName,
-                    car.DailyPrice
-                    );
-            }
-        }
+        //    foreach (var car in carManager.GetCarDetails().Data)
+        //    {
+        //        Console.WriteLine("{0}:{1}:{2}:{3}",
+        //            car.CarName,
+        //            car.BrandName,
+        //            car.ColorName,
+        //            car.DailyPrice
+        //            );
+        //    }
+        //}
     }
 }

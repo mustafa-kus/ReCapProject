@@ -14,20 +14,47 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositorybase<Car, ReCapDBContext>, ICarDal
     {
-        public List<CarDetailDto> GetAllCarDetail()
+        public CarDetailDto GetCarDetail(int carId)
         {
             using (ReCapDBContext context = new ReCapDBContext())
             {
-                var result = from c in context.Cars
-                             join b in context.Brands on c.BrandId equals b.BrandId
-                             join clr in context.Colors on c.ColorId equals clr.ColorId
+                var result = from p in context.Cars.Where(p => p.Id == carId)
+                             join c in context.Colors
+                             on p.ColorId equals c.ColorId
+                             join d in context.Brands
+                             on p.BrandId equals d.BrandId
                              select new CarDetailDto
                              {
-                                 CarName = c.Description,
-                                 BrandName = b.BrandName,
-                                 ColorName=clr.ColorName,
-                                 DailyPrice=c.DailyPrice
-                                 
+                                 BrandName = d.BrandName,
+                                 ColorName = c.ColorName,
+                                 DailyPrice = p.DailyPrice,
+                                 Description = p.Description,
+                                 ModelYear = p.ModelYear,
+                                 CarId = p.Id,
+                                 Status = !context.Rentals.Any(p => p.CarId == carId && p.ReturnDate == null)
+                             };
+
+                return result.SingleOrDefault();
+            }
+        }
+
+        public List<CarDetailDto> GetCarsDetail(Expression<Func<Car, bool>> filter = null)
+        {
+            using (ReCapDBContext context = new ReCapDBContext())
+            {
+                var result = from p in filter == null ? context.Cars : context.Cars.Where(filter)
+                             join c in context.Colors
+                             on p.ColorId equals c.ColorId
+                             join d in context.Brands
+                             on p.BrandId equals d.BrandId
+                             select new CarDetailDto
+                             {
+                                 BrandName = d.BrandName,
+                                 ColorName = c.ColorName,
+                                 DailyPrice = p.DailyPrice,
+                                 Description = p.Description,
+                                 ModelYear = p.ModelYear,
+                                 CarId = p.Id
                              };
                 return result.ToList();
             }

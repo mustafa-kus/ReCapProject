@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 
 namespace Business.Abstract
@@ -16,5 +17,13 @@ namespace Business.Abstract
         IResult Add(IFormFile file, CarImage carImage);
         IResult Update(IFormFile file, CarImage carImage);
         IResult Delete(CarImage carImage);
+
+        IResult Add2(CarImagesOperationDto carImagesOperationDto);
+
+        IResult Update2(CarImagesOperationDto carImagesOperationDto);
+
+        IResult Delete2(CarImage entity);
+
+        IDataResult<List<CarImage>> GetAllByCarId(int carId);
     }
 }
